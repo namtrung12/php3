@@ -6,6 +6,7 @@ use App\Http\Controllers\QttinController;
 use App\Http\Controllers\NguyenVanAController;
 
 Route::get('/', [TinController::class, 'index']);
+Route::get('/dashboard', [TinController::class, 'index']);
 Route::get('/lien-he', [TinController::class, 'lienHe']);
 Route::get('/tin-tuc', [TinController::class, 'tinTuc']);
 
