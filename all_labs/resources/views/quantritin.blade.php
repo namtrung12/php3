@@ -1,19 +1,21 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Quản trị tin
-        </h2>
-    </x-slot>
+@extends('labs.layout')
 
-    <div class="py-10">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="rounded-2xl bg-white p-8 shadow-sm">
-                <p class="text-lg font-semibold">Bạn đang ở khu vực quản trị tin.</p>
-                <p class="mt-4 text-slate-700">
-                    Route này được bảo vệ bằng middleware `auth` đặt trong `__construct` của controller.
-                </p>
-                <p class="mt-3 text-sm text-slate-500">Người dùng hiện tại: {{ auth()->user()->name }} - {{ auth()->user()->email }}</p>
-            </div>
+@section('active_lab', 'lab6')
+@section('title', 'Lab 6 - Quản trị tin')
+
+@section('content')
+    <div class="page-kicker">Lab 6</div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <h1 class="h4 fw-bold">Quản trị tin</h1>
+            <p class="mt-3 mb-2">
+                Bạn đang ở khu vực quản trị tin. Route này được bảo vệ bằng middleware <code>auth</code>
+                đặt trong controller.
+            </p>
+            <p class="small text-secondary mb-0">
+                Người dùng hiện tại: {{ auth()->user()->name }} - {{ auth()->user()->email }}
+            </p>
         </div>
     </div>
-</x-app-layout>
+@endsection

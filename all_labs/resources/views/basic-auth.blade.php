@@ -1,22 +1,22 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            HTTP Basic Authentication
-        </h2>
-    </x-slot>
+@extends('labs.layout')
 
-    <div class="py-10">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="rounded-2xl bg-white p-8 shadow-sm">
-                <p class="text-lg font-semibold">Bạn đã vượt qua lớp xác thực HTTP Basic.</p>
-                <p class="mt-4 text-slate-700">
-                    Middleware `auth.basic` mặc định xác thực bằng email và mật khẩu của bảng `users`.
-                </p>
-                <ul class="mt-4 space-y-2 text-sm text-slate-600">
-                    <li>Ví dụ: `vuiqua@gmail.com / hehe`</li>
-                    <li>Ví dụ: `buonqua@gmail.com / huhu`</li>
-                </ul>
-            </div>
+@section('active_lab', 'lab6')
+@section('title', 'Lab 6 - HTTP Basic Authentication')
+
+@section('content')
+    <div class="page-kicker">Lab 6</div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <h1 class="h4 fw-bold">HTTP Basic Authentication</h1>
+            <p class="mt-3">
+                Bạn đã vượt qua lớp xác thực HTTP Basic. Middleware <code>auth.basic</code> mặc định xác thực
+                bằng email và mật khẩu của bảng <code>users</code>.
+            </p>
+            <ul class="mb-0">
+                <li>Ví dụ admin: <code>vuiqua@gmail.com / hehe</code></li>
+                <li>Ví dụ admin: <code>buonqua@gmail.com / huhu</code></li>
+            </ul>
         </div>
     </div>
-</x-app-layout>
+@endsection

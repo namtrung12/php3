@@ -1,19 +1,17 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Khu vực quản trị
-        </h2>
-    </x-slot>
+@extends('labs.layout')
 
-    <div class="py-10">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="rounded-2xl border border-amber-200 bg-amber-50 p-8 shadow-sm">
-                <p class="text-lg font-semibold text-amber-900">Chỉ admin mới xem được trang này.</p>
-                <p class="mt-4 text-amber-800">
-                    Bạn đã đi qua middleware `quantri` thành công. Điều kiện hiện tại là `idgroup = 1`.
-                </p>
-                <p class="mt-3 text-sm text-amber-700">Tài khoản đang dùng: {{ auth()->user()->email }}</p>
-            </div>
-        </div>
+@section('active_lab', 'lab6')
+@section('title', 'Lab 6 - Khu vực quản trị')
+
+@section('content')
+    <div class="page-kicker">Lab 6</div>
+
+    <div class="alert alert-warning border-warning">
+        <h1 class="h4 fw-bold">Khu vực quản trị</h1>
+        <p class="mb-2">Chỉ admin mới xem được trang này.</p>
+        <p class="mb-0 small">
+            Bạn đã đi qua middleware <code>quantri</code> thành công. Điều kiện hiện tại là <code>idgroup = 1</code>.
+            Tài khoản đang dùng: <strong>{{ auth()->user()->email }}</strong>
+        </p>
     </div>
-</x-app-layout>
+@endsection

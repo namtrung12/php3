@@ -1,48 +1,43 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
-        </h2>
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <h2 class="h5 fw-bold">Đổi mật khẩu</h2>
+        <p class="text-secondary small">Nhập mật khẩu hiện tại trước khi đặt mật khẩu mới.</p>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
+        <form method="post" action="{{ route('password.update') }}" class="mt-4">
+            @csrf
+            @method('put')
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('put')
+            <div class="mb-3">
+                <label class="form-label" for="update_password_current_password">Mật khẩu hiện tại</label>
+                <input id="update_password_current_password" name="current_password" type="password" class="form-control {{ $errors->updatePassword->has('current_password') ? 'is-invalid' : '' }}" autocomplete="current-password">
+                @foreach ($errors->updatePassword->get('current_password') as $message)
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @endforeach
+            </div>
 
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-        </div>
+            <div class="mb-3">
+                <label class="form-label" for="update_password_password">Mật khẩu mới</label>
+                <input id="update_password_password" name="password" type="password" class="form-control {{ $errors->updatePassword->has('password') ? 'is-invalid' : '' }}" autocomplete="new-password">
+                @foreach ($errors->updatePassword->get('password') as $message)
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @endforeach
+            </div>
 
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-        </div>
+            <div class="mb-4">
+                <label class="form-label" for="update_password_password_confirmation">Nhập lại mật khẩu mới</label>
+                <input id="update_password_password_confirmation" name="password_confirmation" type="password" class="form-control {{ $errors->updatePassword->has('password_confirmation') ? 'is-invalid' : '' }}" autocomplete="new-password">
+                @foreach ($errors->updatePassword->get('password_confirmation') as $message)
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @endforeach
+            </div>
 
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-        </div>
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <button class="btn btn-primary" type="submit">Lưu mật khẩu</button>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
+                @if (session('status') === 'password-updated')
+                    <span class="text-success small">Đã lưu.</span>
+                @endif
+            </div>
+        </form>
+    </div>
+</div>

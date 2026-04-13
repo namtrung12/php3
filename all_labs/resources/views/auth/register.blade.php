@@ -1,75 +1,91 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('labs.layout')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" value="Họ tên" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+@section('active_lab', 'lab6')
+@section('title', 'Lab 6 - Đăng ký')
+
+@section('content')
+    <div class="page-kicker">Lab 6</div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h1 class="h4 fw-bold">Đăng ký tài khoản</h1>
+                    <p class="text-secondary small">Form mở rộng thêm địa chỉ, nghề nghiệp và phái theo yêu cầu Lab 6.</p>
+
+                    <form method="POST" action="{{ route('register') }}" class="mt-4">
+                        @csrf
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="name">Họ tên</label>
+                                <input id="name" class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="email">Email</label>
+                                <input id="email" class="form-control @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="diachi">Địa chỉ</label>
+                                <input id="diachi" class="form-control @error('diachi') is-invalid @enderror" type="text" name="diachi" value="{{ old('diachi') }}" autocomplete="street-address">
+                                @error('diachi')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="nghenghiep">Nghề nghiệp</label>
+                                <input id="nghenghiep" class="form-control @error('nghenghiep') is-invalid @enderror" type="text" name="nghenghiep" value="{{ old('nghenghiep') }}">
+                                @error('nghenghiep')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="phai">Phái</label>
+                                <select id="phai" name="phai" class="form-select @error('phai') is-invalid @enderror">
+                                    <option value="">-- Chọn phái --</option>
+                                    <option value="Nam" @selected(old('phai') === 'Nam')>Nam</option>
+                                    <option value="Nữ" @selected(old('phai') === 'Nữ')>Nữ</option>
+                                    <option value="Khác" @selected(old('phai') === 'Khác')>Khác</option>
+                                </select>
+                                @error('phai')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="password">Mật khẩu</label>
+                                <input id="password" class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="new-password">
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="password_confirmation">Nhập lại mật khẩu</label>
+                                <input id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" type="password" name="password_confirmation" required autocomplete="new-password">
+                                @error('password_confirmation')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-4">
+                            <a href="{{ route('login') }}">Đã có tài khoản?</a>
+                            <button class="btn btn-primary" type="submit">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" value="Email" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="mt-4">
-            <x-input-label for="diachi" value="Địa chỉ" />
-            <x-text-input id="diachi" class="block mt-1 w-full" type="text" name="diachi" :value="old('diachi')" autocomplete="street-address" />
-            <x-input-error :messages="$errors->get('diachi')" class="mt-2" />
-        </div>
-
-        <div class="mt-4">
-            <x-input-label for="nghenghiep" value="Nghề nghiệp" />
-            <x-text-input id="nghenghiep" class="block mt-1 w-full" type="text" name="nghenghiep" :value="old('nghenghiep')" />
-            <x-input-error :messages="$errors->get('nghenghiep')" class="mt-2" />
-        </div>
-
-        <div class="mt-4">
-            <x-input-label for="phai" value="Phái" />
-            <select id="phai" name="phai" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                <option value="">-- Chọn phái --</option>
-                <option value="Nam" @selected(old('phai') === 'Nam')>Nam</option>
-                <option value="Nữ" @selected(old('phai') === 'Nữ')>Nữ</option>
-                <option value="Khác" @selected(old('phai') === 'Khác')>Khác</option>
-            </select>
-            <x-input-error :messages="$errors->get('phai')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" value="Mật khẩu" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" value="Nhập lại mật khẩu" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                Đã có tài khoản?
-            </a>
-
-            <x-primary-button class="ms-4">
-                Đăng ký
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection
