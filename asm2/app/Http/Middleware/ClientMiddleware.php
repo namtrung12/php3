@@ -6,20 +6,14 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Quantri
+class ClientMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
         if (! $request->user()) {
             return redirect()
                 ->route('login')
-                ->with('error', 'Vui lòng đăng nhập để tiếp tục.');
-        }
-
-        if ((int) $request->user()->idgroup !== 1) {
-            return redirect()
-                ->route('home')
-                ->with('error', 'Bạn không có quyền truy cập khu vực quản trị.');
+                ->with('error', 'Vui lòng đăng nhập để xem chi tiết sản phẩm.');
         }
 
         return $next($request);

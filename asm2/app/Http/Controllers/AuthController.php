@@ -42,7 +42,11 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('products.index'));
+        $redirectRoute = (int) Auth::user()->idgroup === 1
+            ? 'categories.index'
+            : 'home';
+
+        return redirect()->intended(route($redirectRoute));
     }
 
     public function register(Request $request): RedirectResponse
@@ -82,7 +86,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return redirect()
-            ->route('products.index')
+            ->route('home')
             ->with('success', 'Đăng ký tài khoản thành công.');
     }
 
@@ -93,6 +97,8 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()
+            ->route('home')
+            ->with('success', 'Đăng xuất thành công.');
     }
 }

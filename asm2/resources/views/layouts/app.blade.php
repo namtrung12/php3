@@ -13,12 +13,15 @@
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg bg-white border-bottom">
-        <div class="container justify-content-end">
+        <div class="container d-flex justify-content-between gap-3">
+            <div>
+                <a href="{{ route('home') }}" class="btn btn-outline-secondary">Trang chủ</a>
+            </div>
             <div class="d-flex flex-wrap align-items-center gap-2">
                 @auth
-                    <a href="{{ route('categories.index') }}" class="btn btn-primary">Quản lý danh mục</a>
-                    <a href="{{ route('products.index') }}" class="btn btn-primary">Quản lý sản phẩm</a>
                     @if ((int) auth()->user()->idgroup === 1)
+                        <a href="{{ route('categories.index') }}" class="btn btn-primary">Quản lý danh mục</a>
+                        <a href="{{ route('products.index') }}" class="btn btn-primary">Quản lý sản phẩm</a>
                         <a href="{{ route('users.index') }}" class="btn btn-primary">Quản lý user</a>
                     @endif
                     <span class="text-muted small ms-2">

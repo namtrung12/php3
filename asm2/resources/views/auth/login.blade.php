@@ -5,12 +5,24 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-            <div class="card shadow-sm">
+                <div class="card shadow-sm">
                 <div class="card-body p-4">
                     <h1 class="h3 mb-3">Đăng nhập ASM2</h1>
                     <p class="text-muted">
-                        Đăng nhập để quản lý danh mục, sản phẩm và user.
+                        Đăng nhập để xem sản phẩm hoặc truy cập khu vực quản trị.
                     </p>
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
                     <form method="POST" action="{{ route('login.store') }}" class="mt-4">
                         @csrf

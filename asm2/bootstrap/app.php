@@ -12,6 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
+            'admin' => \App\Http\Middleware\Quantri::class,
+            'client' => \App\Http\Middleware\ClientMiddleware::class,
             'quantri' => \App\Http\Middleware\Quantri::class,
         ]);
     })
